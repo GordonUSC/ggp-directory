@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="color-scheme" content="dark light">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0F1117">
+<meta property="og:title" content="The Directory - Alex's copy">
+<meta property="og:description" content="You own it. Here is all of it, current as of tonight.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%97%82%3C/text%3E%3C/svg%3E">
+<title>The Directory &middot; Alex's copy</title>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --ground:#0F1117; --surface:#171A23; --surface2:#1E222D; --line:#2A2F3D;
+  --ink:#E8E6E1; --ink2:#B9BCC7; --muted:#8A8FA0;
+  --gold:#E9B44C; --cyan:#4FD1C5; --violet:#A78BFA;
+  --go:#5FB87A; --wait:#E9B44C; --risk:#E06B5E;
+  --f-body:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --f-mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f-body);
+     font-size:16.5px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.wrap{max-width:780px;margin:0 auto;padding:0 20px 90px}
+.pride{height:4px;background:linear-gradient(90deg,#E06B5E,#E9B44C,#5FB87A,#4FD1C5,#A78BFA)}
+
+header{padding:38px 0 26px;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-size:clamp(30px,8vw,44px);line-height:1.06;letter-spacing:-.02em;margin:14px 0 14px;font-weight:750}
+.grad{background:linear-gradient(90deg,#E9B44C,#4FD1C5);-webkit-background-clip:text;background-clip:text;color:transparent}
+.thesis{color:var(--ink2);margin:0;font-size:17px}
+.thesis b{color:var(--ink)}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:10px;margin-top:22px}
+.s2{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:13px 15px}
+.s2 .n{font-size:23px;font-weight:750;letter-spacing:-.02em;color:var(--gold)}
+.s2 .l{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.4}
+
+nav.jump{display:flex;flex-wrap:wrap;gap:7px;margin:22px 0 0}
+nav.jump a{font-size:12.5px;font-weight:650;padding:7px 13px;border-radius:999px;
+  border:1px solid var(--line);background:var(--surface);color:var(--ink2);text-decoration:none}
+nav.jump a:active{border-color:var(--cyan);color:var(--cyan)}
+
+section{margin-top:46px;scroll-margin-top:16px}
+.kick{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:750;margin:0 0 7px}
+h2{font-size:24px;line-height:1.16;letter-spacing:-.015em;margin:0 0 8px;font-weight:730}
+.lede{color:var(--ink2);margin:0 0 18px}
+p{margin:11px 0}
+b{color:var(--ink)}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:17px 19px;margin:12px 0}
+.card h3{font-size:16.5px;margin:0 0 8px;font-weight:700}
+.card p{color:var(--ink2);font-size:15.5px;margin:7px 0}
+.card ul{margin:8px 0 0;padding-left:19px}
+.card li{color:var(--ink2);margin-bottom:7px;font-size:15.5px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+@media (max-width:620px){.grid2{grid-template-columns:1fr}}
+.card.in h3{color:var(--go)} .card.out h3{color:var(--risk)}
+
+.prog{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--line);
+  border-radius:12px;padding:13px 16px;margin-bottom:8px}
+.prog.done{border-left-color:var(--go)} .prog.wait{border-left-color:var(--wait)}
+.prog.block{border-left-color:var(--risk)}
+.prog .s{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:750}
+.prog.done .s{color:var(--go)} .prog.wait .s{color:var(--wait)} .prog.block .s{color:var(--risk)}
+.prog .t{font-weight:680;font-size:16px;margin-top:3px}
+.prog .d{color:var(--ink2);font-size:14.8px;margin-top:3px}
+.prog .who{font-size:12.5px;color:var(--muted);margin-top:6px;font-family:var(--f-mono)}
+.prog .who b{color:var(--cyan);font-weight:600}
+
+.quote{border-left:3px solid var(--gold);background:var(--surface2);border-radius:0 12px 12px 0;
+  padding:14px 17px;margin:16px 0;color:var(--ink2);font-size:15.5px}
+.quote .who{display:block;margin-top:7px;font-size:12.5px;color:var(--muted);font-family:var(--f-mono)}
+
+.flag{background:var(--surface2);border:1px solid var(--line);border-left:3px solid var(--gold);
+  border-radius:12px;padding:15px 18px;margin:14px 0;color:var(--ink2);font-size:15.5px}
+.flag.cyan{border-left-color:var(--cyan)} .flag.red{border-left-color:var(--risk)}
+.flag h4{color:var(--ink);font-size:16.5px;margin:0 0 7px;font-weight:700}
+.flag p{margin:7px 0}
+
+.filters{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 14px}
+.fb{font-size:12.5px;font-weight:700;padding:8px 14px;border-radius:999px;border:1px solid var(--line);
+  background:var(--surface);color:var(--ink2);cursor:pointer;-webkit-appearance:none}
+.fb.on{border-color:var(--cyan);color:var(--cyan)}
+
+details{background:var(--surface);border:1px solid var(--line);border-radius:12px;margin-bottom:8px;overflow:hidden}
+details[open]{border-color:var(--cyan)}
+summary{cursor:pointer;padding:14px 16px;list-style:none;display:grid;grid-template-columns:1fr auto;
+  gap:11px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary .nm{font-weight:680;font-size:16px;line-height:1.3}
+summary .meta{font-size:13px;color:var(--muted);margin-top:3px;line-height:1.4}
+.body{padding:13px 16px 16px;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:96px 1fr;gap:0 12px;margin:8px 0;font-size:15px}
+@media (max-width:480px){.row{grid-template-columns:1fr;gap:2px}}
+.row .k{color:var(--muted);font-family:var(--f-mono);font-size:11px;text-transform:uppercase;
+  letter-spacing:.09em;padding-top:4px}
+.row .v{color:var(--ink2)}
+.chip{font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;font-weight:750;
+  padding:4px 9px;border-radius:999px;white-space:nowrap;align-self:start;margin-top:3px}
+.chip.v{color:var(--go);background:rgba(95,184,122,.13)}
+.chip.s{color:var(--gold);background:rgba(233,180,76,.12)}
+.chip.q{color:var(--risk);background:rgba(224,107,94,.14)}
+.chip.ai{color:var(--violet);background:rgba(167,139,250,.15)}
+.chip.now{color:#0F1117;background:var(--gold)}
+
+.ask{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:17px 19px;margin:12px 0}
+.ask .q{font-weight:700;font-size:16.5px;margin:0 0 5px}
+.ask .why{color:var(--ink2);font-size:15px;margin:0 0 12px}
+.opts{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:11px}
+.opt{font-size:13.5px;font-weight:650;padding:9px 14px;border-radius:999px;border:1px solid var(--line);
+  background:var(--surface2);color:var(--ink2);cursor:pointer;-webkit-appearance:none}
+.opt.on{border-color:var(--gold);color:var(--gold);background:rgba(233,180,76,.09)}
+textarea{width:100%;background:var(--ground);border:1px solid var(--line);border-radius:11px;
+  color:var(--ink);font-family:var(--f-body);font-size:16px;padding:12px 13px;min-height:76px;
+  resize:vertical;-webkit-appearance:none}
+textarea:focus{outline:none;border-color:var(--cyan)}
+.saved{font-size:12px;color:var(--muted);margin-top:7px;font-family:var(--f-mono);min-height:16px}
+
+.bar{position:sticky;bottom:0;background:linear-gradient(180deg,rgba(15,17,23,0),var(--ground) 34%);
+  padding:22px 0 16px;margin-top:36px}
+.bar .in{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:13px 15px;
+  display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.bar .cnt{font-size:13px;color:var(--muted);font-family:var(--f-mono);flex:1;min-width:120px}
+button.act{font-size:14.5px;font-weight:700;padding:11px 17px;border-radius:11px;border:none;
+  background:var(--gold);color:#0F1117;cursor:pointer;-webkit-appearance:none}
+button.act.ghost{background:transparent;color:var(--ink2);border:1px solid var(--line)}
+
+footer{margin-top:54px;border-top:1px solid var(--line);padding-top:16px;
+  font-size:12.5px;color:var(--muted);font-family:var(--f-mono);line-height:1.75}
+a{color:var(--cyan)}
+</style>
+</head>
+<body>
+<div class="pride"></div>
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">GGP &middot; for Alex Rogers, owner &middot; current as of 7 August, evening</p>
+  <h1>The Directory.<br><span class="grad">You own it.</span></h1>
+  <p class="thesis">You said yes to this a few hours ago, so here is the whole thing rather than a summary of it. <b>The Directory maps the programs. The Pipeline adds the people.</b> Built over the last week, verified in three research waves, and waiting on you for exactly four decisions. Everything else already has somebody's name on it, and most of those names are not yours.</p>
+  <div class="stats">
+    <div class="s2"><div class="n">53</div><div class="l">verified entries, K through graduate</div></div>
+    <div class="s2"><div class="n">$30K</div><div class="l">Take-Two, inaugural lead sponsor</div></div>
+    <div class="s2"><div class="n">4</div><div class="l">decisions that are actually yours</div></div>
+    <div class="s2"><div class="n">Oct 9</div><div class="l">public launch, if you say it is real</div></div>
+  </div>
+  <nav class="jump">
+    <a href="#you">What you decided</a>
+    <a href="#state">Where we are</a>
+    <a href="#what">What it is</a>
+    <a href="#scope">In and out</a>
+    <a href="#catalog">The catalog</a>
+    <a href="#lap">What just changed</a>
+    <a href="#money">The money</a>
+    <a href="#yours">Your four</a>
+  </nav>
+</header>
+
+<section id="you">
+  <p class="kick">Start here</p>
+  <h2>What you decided today, and what it set in motion</h2>
+  <div class="quote">
+    "I'll own it. Teamwork from the GGP team, using AI to assist."
+    <span class="who">Alex Rogers, 7 August 2026</span>
+  </div>
+  <p>That answered the one question that decides whether this survives. Directories rot when nobody owns them, and a stale directory is worse than none because people trust it and get burned. You just removed that risk.</p>
+  <p>What it does <b>not</b> mean is that you now maintain 53 entries by hand. The catalog was researched and verified by AI in three waves, it refreshes on a quarterly calendar, and corrections come in through an inbox rather than through you. <b>Owning it means you set direction and you say what is true. The typing is somebody else's job.</b></p>
+</section>
+
+<section id="state">
+  <p class="kick">Honest state</p>
+  <h2>Where we actually are tonight</h2>
+  <p class="lede">Green is done and standing. Amber is waiting on a person, and that person is named. Red needs a decision.</p>
+
+  <div class="prog done"><div class="s">Built</div>
+    <div class="t">The catalog and the three lenses</div>
+    <div class="d">53 entries, each with evidence and a verification date. Donor, student, and recruiter views reorder the entire page so each audience gets its own front door into the same truth.</div>
+    <div class="who">owner: <b>Darby</b> &middot; nothing needed from you</div></div>
+
+  <div class="prog done"><div class="s">Built</div>
+    <div class="t">Deadline calendar you can drop on a phone</div>
+    <div class="d">Chronological August 2026 through April 2027, plus a downloadable calendar file with alarms. This is the piece your scholars will actually use in September.</div>
+    <div class="who">owner: <b>Darby</b> &middot; yours to send to the cohort whenever you want it</div></div>
+
+  <div class="prog done"><div class="s">Built</div>
+    <div class="t">Pipeline flows and the Supporters Atlas</div>
+    <div class="d">Recruiter introduction requests and scholar profile interest both route to the GGP inbox, consent first. The funder-to-program reverse index is source dated.</div>
+    <div class="who">owner: <b>Darby</b> &middot; watching the inbox</div></div>
+
+  <div class="prog done"><div class="s">Funded</div>
+    <div class="t">Take-Two at $30,000</div>
+    <div class="d">Board approved unanimously on 18 June as inaugural lead sponsor of the Directory. Separate from the $25,000 they raised CYSTEM to.</div>
+    <div class="who">owner: <b>Gordon and Sinjin</b> &middot; already banked</div></div>
+
+  <div class="prog wait"><div class="s">Waiting</div>
+    <div class="t">Eric's signoff and a real kickoff date</div>
+    <div class="d">August 10 is a pencil mark somebody made without asking anyone. It moves freely.</div>
+    <div class="who">owner: <b>Eric Francksen</b>, Executive Producer &middot; Gordon is chasing it</div></div>
+
+  <div class="prog wait"><div class="s">Waiting</div>
+    <div class="t">The EA and ESA coalition approaches</div>
+    <div class="d">Alan Lewis offered in writing on 18 June to make both introductions with us. Seven weeks unused. One seat closes the funding gap outright.</div>
+    <div class="who">owner: <b>Gordon</b> &middot; not your ask to make</div></div>
+
+  <div class="prog block"><div class="s">Needs a name</div>
+    <div class="t">The data steward</div>
+    <div class="d">One person accountable for verification and corrections after launch. Until that seat is filled, the honesty promise has nobody standing behind it, and honesty is the entire differentiator. <b>This is not automatically you.</b> It could be an Extended Scholar, which would be real resume-grade work for one of your recent grads.</div>
+    <div class="who">decision: <b>yours</b>, question 3 below</div></div>
+
+  <div class="prog block"><div class="s">Decision</div>
+    <div class="t">Is October 9 a launch anyone can produce?</div>
+    <div class="d">It sits deliberately ahead of the Bigglesworth letter-of-intent window, which is the fall deadline for a funder who wants to see something real before their board decides. If October 9 is not producible, we would all rather move it now than find out in week six.</div>
+    <div class="who">decision: <b>yours and Eric's</b>, question 4 below</div></div>
+</section>
+
+<section id="what">
+  <p class="kick">The vision</p>
+  <h2>What it is, in two halves</h2>
+  <p class="lede">The games-education field is mid-realignment. In eighteen months the Cxmmunity HBCU league went dark, HSEL was absorbed into PlayVS, Microsoft's TEALS wound down, and Twitch's student scholarship has been dormant since 2021. <b>The companies behind those programs did not stop caring. They lost the vehicle.</b> There is real money in this field looking for a home, and nobody is building the home.</p>
+  <div class="grid2">
+    <div class="card">
+      <h3>Half one &middot; the Directory</h3>
+      <p>Every credible path into game-making, honestly cataloged. It answers the donor question: <b>where do dollars go furthest?</b></p>
+      <p>Every entry carries evidence and a verification date. Badges read VERIFIED, SOURCED, or VERIFY, which means <b>we publish our own gaps.</b> Nobody else in this space does that, and it is why a board can trust it.</p>
+    </div>
+    <div class="card">
+      <h3>Half two &middot; the Pipeline</h3>
+      <p>Opt-in profiles of scholars and alumni that recruiters can hire from. Different question: <b>who is ready?</b></p>
+      <p>Consent first and student controlled. Recruiters <b>request an introduction and GGP makes it.</b> No browsing, no cold outreach, no contact details without the student's yes.</p>
+    </div>
+  </div>
+  <div class="quote">
+    "I wish we could've gotten to know other CYSTEM students at other schools."
+    <span class="who">KB, USC &middot; Year 1 exit survey</span>
+  </div>
+  <p>That was the loudest finding at every school. The Directory is that complaint answered and made durable, then extended out to alumni and industry. <b>Your alumni list is the seed. Your Discord is where it lives day to day. Your mentor call fills the mentor column.</b> It is not a fourth thing to maintain. It is a spine for the three you already maintain.</p>
+</section>
+
+<section id="scope">
+  <p class="kick">The scoping frame</p>
+  <h2>What v1 is, and is not</h2>
+  <p class="lede">Everything in the right column is a good idea that would sink October. Holding this line is most of the job.</p>
+  <div class="grid2">
+    <div class="card in">
+      <h3>&#9670; IN for v1</h3>
+      <ul>
+        <li>The catalog: 53 badged entries with verification dates</li>
+        <li>Three lenses reordering the page per audience</li>
+        <li>Deadline calendar plus phone download</li>
+        <li>Pipeline alpha: opt-in profiles, brokered introductions</li>
+        <li>Supporters Atlas, source dated</li>
+        <li>Quarterly refresh calendar and a corrections inbox</li>
+      </ul>
+    </div>
+    <div class="card out">
+      <h3>&#9670; OUT for v1</h3>
+      <ul>
+        <li><b>Public recruiter names.</b> Aggregate only unless individuals opt in</li>
+        <li><b>Automated matching.</b> Every introduction stays human</li>
+        <li><b>Storing student data</b> beyond the opt-in profile</li>
+        <li>Wave Three research: graduate fellowships, K-8, streaming</li>
+        <li>Placement guarantees, to anyone</li>
+        <li>An app, a login, or accounts</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="catalog">
+  <p class="kick">Go deeper</p>
+  <h2>The catalog, openable</h2>
+  <p class="lede">A representative slice of the 53, with the evidence behind each one. Tap any row. <span class="chip now">TIME-CRITICAL</span> means a deadline inside the next ninety days. Check the work rather than take anyone's word for it.</p>
+  <div class="filters">
+    <button class="fb on" data-f="all">All</button>
+    <button class="fb" data-f="urgent">Time-critical</button>
+    <button class="fb" data-f="k12">K-12</button>
+    <button class="fb" data-f="bridge">Bridge &amp; HBCU</button>
+    <button class="fb" data-f="ug">Undergraduate</button>
+    <button class="fb" data-f="intern">Studio internships</button>
+    <button class="fb" data-f="ai">AI lane</button>
+  </div>
+
+  <details data-t="intern urgent">
+    <summary><div><div class="nm">Studio internships &middot; Riot, Blizzard, Activision</div><div class="meta">All paid &middot; applications open September through November</div></div><span class="chip v">VERIFIED</span></summary>
+    <div class="body">
+      <div class="row"><div class="k">Riot</div><div class="v">US Summer Internships <b>open in September</b>, first posting wave early October. All paid.</div></div>
+      <div class="row"><div class="k">Blizzard</div><div class="v">12 weeks, <b>paid plus relocation and living support.</b> Opened October 13 last cycle and ran into January. Six disciplines. Their own line: <b>"you don't need to be a gamer."</b> Separate MBA program runs October to February.</div></div>
+      <div class="row"><div class="k">Activision</div><div class="v">12 weeks. Applications <b>September through November</b>, art roles into January. Co-ops exist.</div></div>
+      <div class="row"><div class="k">Why it matters</div><div class="v"><b>This is the whole reason the September push exists.</b> A scholar who applies in wave one with a finished portfolio is playing a different game than one who finds out in November. August is the only month to get ready.</div></div>
+    </div>
+  </details>
+
+  <details data-t="ai urgent">
+    <summary><div><div class="nm">Cohere Labs Scholars Program</div><div class="meta">Paid 8-month research apprenticeship &middot; accepting now</div></div><span class="chip ai">AI LANE</span></summary>
+    <div class="body">
+      <div class="row"><div class="k">Status</div><div class="v"><b>Open for applications as of August 2026.</b> Our entry used to say "opens approximately August." The research lap yesterday confirmed it is live.</div></div>
+      <div class="row"><div class="k">Shape</div><div class="v">Remote first, full time, <b>fully paid</b>, eight months, starting each January.</div></div>
+      <div class="row"><div class="k">Scholars get</div><div class="v">Mentorship from ML research and engineering staff, access to large-scale experimental settings, and a matched research project.</div></div>
+      <div class="row"><div class="k">Why it matters</div><div class="v">The AI lane has world-class PhD fellowships and almost nothing at undergraduate access level. <b>This is the standout, and it is largely unclaimed by funders.</b></div></div>
+    </div>
+  </details>
+
+  <details data-t="k12">
+    <summary><div><div class="nm">Girls Make Games &middot; flagship summer camps</div><div class="meta">Ages 8-18 &middot; girls and non-binary &middot; no experience needed</div></div><span class="chip v">VERIFIED</span></summary>
+    <div class="body">
+      <div class="row"><div class="k">Cost</div><div class="v">$2,300 in Redmond at DigiPen and the Bay Area at Crystal Dynamics and Zynga. <b>Free in Los Angeles</b> at ASU DTLA.</div></div>
+      <div class="row"><div class="k">Aid</div><div class="v">Up to <b>100% need based.</b> They have <b>never turned an applicant away in 13 years.</b></div></div>
+      <div class="row"><div class="k">Scholarship</div><div class="v">Separate GMG Scholarship Fund: <b>$10,000 named awards</b>, $2,500 a year for four years.</div></div>
+      <div class="row"><div class="k">Backed by</div><div class="v">Sony Interactive, Take-Two, and Humble Bundle founded the scholarship fund in 2022. Nintendo and Crystal Dynamics sponsor prizes. Burroughs Wellcome added $180K for STEM camps.</div></div>
+      <div class="row"><div class="k">Why it matters</div><div class="v">The clearest "no student is turned away" claim in the catalog, and Take-Two is already inside it. A natural coalition story.</div></div>
+    </div>
+  </details>
+
+  <details data-t="bridge">
+    <summary><div><div class="nm">PlayVS &times; Urban One &middot; Power4+ HBCU league</div><div class="meta">32 HBCUs &middot; fee-free &middot; inaugural season February 2027</div></div><span class="chip s">SOURCED</span></summary>
+    <div class="body">
+      <div class="row"><div class="k">Cost</div><div class="v"><b>Fee-free.</b></div></div>
+      <div class="row"><div class="k">Timeline</div><div class="v">Named with logo 17 June 2026. Advisory committee picks titles over the summer. <b>Invitationals Fall 2026. Inaugural season February 2027</b> with an in-person national championship.</div></div>
+      <div class="row"><div class="k">Roster</div><div class="v">32 HBCUs including Bowie State, Clark Atlanta, Grambling, and Howard.</div></div>
+      <div class="row"><div class="k">Why it matters</div><div class="v"><b>This is the successor to the lapsed Cxmmunity HBCU league</b>, the single clearest example of the realignment thesis: a program died and the money behind it went looking for a new home. We carry it on realignment, not on esports.</div></div>
+    </div>
+  </details>
+
+  <details data-t="bridge">
+    <summary><div><div class="nm">EA Madden Scholarship via UNCF</div><div class="meta">HBCU undergraduate &middot; active 2025-26 cycle</div></div><span class="chip s">SOURCED</span></summary>
+    <div class="body">
+      <div class="row"><div class="k">Award</div><div class="v">Up to <b>$12,000 a year, renewable.</b> 24 awards across 8 HBCUs.</div></div>
+      <div class="row"><div class="k">Status</div><div class="v"><b>Active</b>, unlike much of this lane.</div></div>
+      <div class="row"><div class="k">Backed by</div><div class="v">EA's <b>$5M Madden Legacy Commitment</b>, administered with UNCF.</div></div>
+      <div class="row"><div class="k">Why it matters</div><div class="v">EA is the company Alan offered to co-approach. Walking in already knowing their live education commitment changes that conversation.</div></div>
+    </div>
+  </details>
+
+  <details data-t="ug urgent">
+    <summary><div><div class="nm">ESA Foundation scholarships</div><div class="meta">Undergraduate &middot; $5,000-$10,000 &middot; next window March 1, 2027</div></div><span class="chip v">VERIFIED</span></summary>
+    <div class="body">
+      <div class="row"><div class="k">Award</div><div class="v"><b>$5,000 to $10,000</b>, roughly 30 awards, two tracks: Game Arts and Sciences, and esports players and managers.</div></div>
+      <div class="row"><div class="k">Eligibility</div><div class="v">2.5 GPA, US citizen, four-year full time, need based. <b>Select upperclassmen get a fully covered GDC 2027 trip.</b></div></div>
+      <div class="row"><div class="k">Dates</div><div class="v">2026-27 closed April 30. <b>Next window opens March 1, 2027.</b></div></div>
+      <div class="row"><div class="k">Track record</div><div class="v"><b>500+ scholars since 2007</b>, 31 universities this cycle, $24M+ raised lifetime.</div></div>
+      <div class="row"><div class="k">Why it matters</div><div class="v">Aubrey at ESA is the second door Alan offered. Xbox has led their gala two years running and <b>Google co-led in 2026</b>, a fresh signal that Google is spending here again.</div></div>
+    </div>
+  </details>
+
+  <details data-t="ai">
+    <summary><div><div class="nm">NVIDIA &middot; graduate fellowship and university recruiting</div><div class="meta">$60,000 fellowship &middot; roughly September deadline</div></div><span class="chip ai">AI LANE</span></summary>
+    <div class="body">
+      <div class="row"><div class="k">Award</div><div class="v"><b>$60,000</b> graduate fellowship, deadline approximately September.</div></div>
+      <div class="row"><div class="k">Also</div><div class="v">Five university recruiting lanes including <b>IGNITE</b>, which is a freshman and sophomore access route rather than a senior pipeline.</div></div>
+      <div class="row"><div class="k">Our door</div><div class="v"><b>Seth Radin</b>, Senior Manager of University Recruiting, connected June 2025. Plus Milan Sewell and Wil Price. <b>Three doors into the deepest university program in AI.</b></div></div>
+      <div class="row"><div class="k">Honest gap</div><div class="v">GGP has <b>zero</b> recruiting contacts at OpenAI, Anthropic, or DeepMind. Named in the Directory rather than hidden.</div></div>
+    </div>
+  </details>
+
+  <details data-t="bridge">
+    <summary><div><div class="nm">Sony Career Pathways &middot; HBCU CS scholarships</div><div class="meta">Up to $30,000 per scholar &middot; 2026-27 status unverified</div></div><span class="chip q">VERIFY</span></summary>
+    <div class="body">
+      <div class="row"><div class="k">Terms</div><div class="v">Up to <b>$30,000 per scholar</b> across three tracks: business, engineering, creative. <b>$11M+ committed.</b></div></div>
+      <div class="row"><div class="k">Problem</div><div class="v">Those terms are the 2022 page state. <b>The program URL now 404s and the 2026-27 cycle is unconfirmed.</b></div></div>
+      <div class="row"><div class="k">Action</div><div class="v">Ask <b>Phil Rosenberg</b> quietly, same conversation as the USC Lawson Fund, whose page also 404s with no announced cohort since 2023.</div></div>
+      <div class="row"><div class="k">Why it matters</div><div class="v">This is what a VERIFY badge is for. <b>Publishing the uncertainty is the product.</b> A directory that quietly dropped this entry would be less honest and less useful.</div></div>
+    </div>
+  </details>
+
+  <details data-t="ug">
+    <summary><div><div class="nm">The degree tier &middot; Princeton Review 2026 checked</div><div class="meta">NYU #1 &middot; USC #2 &middot; UCF #3 &middot; DigiPen #6 &middot; RIT #7</div></div><span class="chip s">RANKINGS-CHECKED</span></summary>
+    <div class="body">
+      <div class="row"><div class="k">NYU</div><div class="v">Named aid: <b>Take-Two Scholarship</b> (quarter tuition, three MFA), Barlovento Scholarship for Women (full tuition), Evo Scholarship (Daigo Umehara, $60K).</div></div>
+      <div class="row"><div class="k">USC</div><div class="v">EA Endowed Chair since 2004. Lawson Fund seeded by Take-Two with Sony at $3M and Microsoft founding, <b>but the page 404s and no cohort has been announced since 2023.</b></div></div>
+      <div class="row"><div class="k">UCF</div><div class="v">EA founding partner, EA Inclusion in Gaming endowment at $125K, Iron Galaxy scholarship. Public tuition makes it the value play.</div></div>
+      <div class="row"><div class="k">Why it matters</div><div class="v">Take-Two's name is already on aid at the number one school. The coalition story writes itself, and <b>two of your three core campuses, NYU and USC, are sitting at the top of it.</b></div></div>
+    </div>
+  </details>
+
+  <details data-t="k12 urgent">
+    <summary><div><div class="nm">PlayVS &middot; 2026-27 scholastic esports season</div><div class="meta">Middle and high school &middot; deadline disputed &middot; deprioritized</div></div><span class="chip q">VERIFY</span></summary>
+    <div class="body">
+      <div class="row"><div class="k">Cost</div><div class="v"><b>$595 per high school</b> for the full academic year, <b>$495 early bird.</b> Middle school $495, $395 early bird. One fee covers every season, no limit on titles, teams, or players.</div></div>
+      <div class="row"><div class="k">Deadline</div><div class="v"><b>Contested.</b> The PlayVS FAQ says September 4, 2026. Kentucky HSAA published August 7, 2026 back on 22 June. <b>Somebody should settle this by phone before we publish a date that could cost a school $100.</b></div></div>
+      <div class="row"><div class="k">Catch</div><div class="v">Schools using the PlayVS fundraising platform are <b>ineligible</b> for early-bird pricing.</div></div>
+      <div class="row"><div class="k">Priority</div><div class="v"><b>Deprioritized 6 August, Gordon's call.</b> GGP's work is game-making and industry careers. Esports league logistics is somebody else's fight. Listed for completeness, carried at VERIFY, never led with.</div></div>
+    </div>
+  </details>
+</section>
+
+<section id="lap">
+  <p class="kick">Research lap &middot; 6 and 7 August</p>
+  <h2>What changed since the catalog was built</h2>
+  <div class="flag cyan">
+    <h4>&#10022; Cohere Labs Scholars is open right now</h4>
+    <p>We had it flagged as "opens approximately August." <b>It is accepting applications.</b> Fully paid, remote first, full time, eight months, starting each January. It is the strongest undergraduate-access AI opportunity in the catalog and the thinnest-covered lane in the field. <b>This is the kind of entry that should lead:</b> paid, career forming, and pointed straight at the industry.</p>
+  </div>
+  <div class="flag">
+    <h4>Esports is a listed lane, not a headline</h4>
+    <p><b>Gordon's call, 6 August.</b> GGP's work is game-making and industry careers. The esports entries stay in the catalog for completeness, but they come off the front of the story and out of all urgency framing. Power4+ is the one exception, and it stays visible on the realignment thesis rather than on esports.</p>
+    <p>Practical consequence: the disputed PlayVS date now gets published both ways with an honest "we have not resolved this" rather than becoming the field's headline deadline. That is exactly what a VERIFY badge is for.</p>
+  </div>
+  <div class="flag">
+    <h4>Coverage gaps we are naming rather than hiding</h4>
+    <p>Two research waves produced zero surviving claims in four lanes: <b>graduate fellowships, K-8 expansion, streaming funds, and student competitions.</b> Those are Wave Three, and they are out of scope for v1 on purpose. Studio careers pages block automated verification, so internships were verified a second way, through 37 self-identified game-industry interns in Gordon's own network.</p>
+  </div>
+</section>
+
+<section id="money">
+  <p class="kick">The money, honestly</p>
+  <h2>Funded, and the gap</h2>
+  <div class="card">
+    <p><b>Take-Two, $30,000</b>, inaugural lead sponsor of the Directory, board approved unanimously 18 June. That is separate from the $25,000 they raised CYSTEM to, and it is already banked.</p>
+    <p><b>Realistic scope is $40,000 to $50,000</b> for build, verification, and first-year maintenance. <b>Gap: $10,000 to $20,000.</b></p>
+    <p><b>Alan Lewis offered, in writing on 18 June, to make coalition approaches at EA through Tammy and ESA through Aubrey.</b> One seat closes the gap outright. Two makes this a coalition asset instead of a single-sponsor one, which is safer for Take-Two and stronger for the field. That is Gordon's ask to make, not yours.</p>
+  </div>
+  <div class="flag red">
+    <h4>The one risk worth holding the line on</h4>
+    <p><b>Pipeline consent.</b> If a scholar's information ever reaches a recruiter without that scholar's explicit yes, the trust that makes this work is gone and does not come back. The standing rule: any consent failure pauses the Pipeline entirely, whatever it costs the calendar. Better to ship late than ship that wrong. You are the owner now, so that line is yours to hold too.</p>
+  </div>
+</section>
+
+<section id="yours">
+  <p class="kick">Only you can answer these</p>
+  <h2>Four questions, and then this moves</h2>
+  <p class="lede">Everything else on this page has an owner who is not you. These four do not move without you. Type as much or as little as you want, it saves as you go, and there is a copy button at the bottom.</p>
+
+  <div class="ask" data-q="q1">
+    <p class="q">1. Does the Directory launch to your scholars first, or to the field first?</p>
+    <p class="why">Scholars first means your cohort gets a head start on September internship applications and you find the bugs with a friendly audience. Field first means a bigger splash but you are debugging in public.</p>
+    <div class="opts">
+      <button class="opt" data-v="Scholars first, quietly">Scholars first, quietly</button>
+      <button class="opt" data-v="Field first, one launch">Field first, one launch</button>
+      <button class="opt" data-v="Scholars in September, field October 9">Scholars Sept, field Oct 9</button>
+    </div>
+    <textarea placeholder="Anything you want to add"></textarea>
+    <div class="saved"></div>
+  </div>
+
+  <div class="ask" data-q="q2">
+    <p class="q">2. Does the alumni list seed the Pipeline, and on what terms?</p>
+    <p class="why">Your 18 alumni with where they landed is the strongest asset anyone has produced for this. It could seed the Pipeline immediately. It is also their data, so nobody touches it without a rule you set.</p>
+    <div class="opts">
+      <button class="opt" data-v="Yes, but I ask each one first">Yes, I ask each one first</button>
+      <button class="opt" data-v="Yes, opt-out rather than opt-in">Yes, opt-out is fine</button>
+      <button class="opt" data-v="Not yet, alumni stay out of v1">Not yet, keep them out of v1</button>
+    </div>
+    <textarea placeholder="Anything you want to add"></textarea>
+    <div class="saved"></div>
+  </div>
+
+  <div class="ask" data-q="q3">
+    <p class="q">3. Who is the data steward?</p>
+    <p class="why">One person accountable for verification and corrections after launch. Roughly a few hours a month once the quarterly refresh is automated. An Extended Scholar doing this gets a real, nameable credential out of it.</p>
+    <div class="opts">
+      <button class="opt" data-v="An Extended Scholar, paid">An Extended Scholar, paid</button>
+      <button class="opt" data-v="An Extended Scholar, for the credit">An Extended Scholar, for credit</button>
+      <button class="opt" data-v="Me, with AI doing the lifting">Me, with AI doing the lifting</button>
+      <button class="opt" data-v="This needs a budgeted hire">Needs a budgeted hire</button>
+    </div>
+    <textarea placeholder="If you have a name already, put it here"></textarea>
+    <div class="saved"></div>
+  </div>
+
+  <div class="ask" data-q="q4">
+    <p class="q">4. Is October 9 real?</p>
+    <p class="why">It sits ahead of a funder's fall letter-of-intent deadline on purpose, so there is a reason for it. But you know what your fall actually looks like, and a date nobody can hit costs more than a date that moves now.</p>
+    <div class="opts">
+      <button class="opt" data-v="October 9 is real, hold it">It is real, hold it</button>
+      <button class="opt" data-v="Real only if the data steward is named this month">Real if the steward is named</button>
+      <button class="opt" data-v="Move it, and here is why">Move it</button>
+      <button class="opt" data-v="Ask Eric, I will follow his call">Ask Eric, I follow his call</button>
+    </div>
+    <textarea placeholder="Anything you want to add"></textarea>
+    <div class="saved"></div>
+  </div>
+
+  <div class="card">
+    <h3>And one thing that is not a question</h3>
+    <p>If anything on this page is wrong, say so and it changes. That happened four times today already on the CYSTEM page, and every time you were right and the page was wrong. <b>You know this program better than anyone typing behind the scenes.</b></p>
+  </div>
+</section>
+
+<div class="bar">
+  <div class="in">
+    <span class="cnt" id="cnt">0 of 4 answered</span>
+    <button class="act" id="copy">Copy my notes</button>
+    <button class="act ghost" id="clear">Clear</button>
+  </div>
+</div>
+
+<footer>
+  Built for Alex Rogers, owner of the Directory, on 7 August 2026.<br>
+  Sources: three verification waves across the field, the Year 1 exit survey, the Supporters Atlas,
+  Gordon's own network for internship confirmation, and the Take-Two board record of 18 June.
+  Badges say VERIFIED, SOURCED, or VERIFY, and VERIFY means we have not settled it yet.
+  Anything not verified is marked rather than asserted.<br>
+  Your answers save on this device only. Nothing is sent anywhere until you send it.<br>
+  Companion page: <a href="https://gordonusc.github.io/cystem-2026-27/">CYSTEM 2026-27, the year ahead</a>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var KEY = 'ggp-directory-alex-v1';
+  var store = {};
+  try { store = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e) { store = {}; }
+
+  function save(){
+    try { localStorage.setItem(KEY, JSON.stringify(store)); } catch(e) {}
+    count();
+  }
+
+  function count(){
+    var n = 0;
+    document.querySelectorAll('.ask').forEach(function(a){
+      var d = store[a.dataset.q];
+      if (d && ((d.choice && d.choice.length) || (d.note && d.note.trim().length))) n++;
+    });
+    var el = document.getElementById('cnt');
+    if (el) el.textContent = n + ' of 4 answered';
+  }
+
+  document.querySelectorAll('.ask').forEach(function(ask){
+    var id = ask.dataset.q;
+    var ta = ask.querySelector('textarea');
+    var note = ask.querySelector('.saved');
+    if (!store[id]) store[id] = { choice: '', note: '' };
+
+    if (store[id].note) ta.value = store[id].note;
+
+    ask.querySelectorAll('.opt').forEach(function(btn){
+      if (store[id].choice === btn.dataset.v) btn.classList.add('on');
+      btn.addEventListener('click', function(){
+        var already = btn.classList.contains('on');
+        ask.querySelectorAll('.opt').forEach(function(b){ b.classList.remove('on'); });
+        if (already) { store[id].choice = ''; }
+        else { btn.classList.add('on'); store[id].choice = btn.dataset.v; }
+        note.textContent = 'Saved';
+        save();
+      });
+    });
+
+    ta.addEventListener('input', function(){
+      store[id].note = ta.value;
+      note.textContent = 'Saved';
+      save();
+    });
+  });
+
+  document.querySelectorAll('.fb').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.fb').forEach(function(b){ b.classList.remove('on'); });
+      btn.classList.add('on');
+      var f = btn.dataset.f;
+      document.querySelectorAll('details[data-t]').forEach(function(d){
+        d.style.display = (f === 'all' || d.dataset.t.split(' ').indexOf(f) > -1) ? '' : 'none';
+      });
+    });
+  });
+
+  var LABELS = {
+    q1: 'Scholars first or field first',
+    q2: 'Alumni list seeding the Pipeline',
+    q3: 'The data steward',
+    q4: 'Is October 9 real'
+  };
+
+  document.getElementById('copy').addEventListener('click', function(){
+    var out = ['Alex on the Directory, ' + new Date().toLocaleDateString() + '', ''];
+    Object.keys(LABELS).forEach(function(k){
+      var d = store[k] || {};
+      if ((d.choice && d.choice.length) || (d.note && d.note.trim().length)) {
+        out.push(LABELS[k] + ':');
+        if (d.choice) out.push('  ' + d.choice);
+        if (d.note && d.note.trim()) out.push('  ' + d.note.trim());
+        out.push('');
+      }
+    });
+    if (out.length <= 2) { out.push('(nothing answered yet)'); }
+    var text = out.join('\n');
+    var btn = this;
+    function done(){ btn.textContent = 'Copied, paste it to Gordon'; setTimeout(function(){ btn.textContent = 'Copy my notes'; }, 2600); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, fallback);
+    } else { fallback(); }
+    function fallback(){
+      var t = document.createElement('textarea');
+      t.value = text; t.style.position = 'fixed'; t.style.opacity = '0';
+      document.body.appendChild(t); t.select();
+      try { document.execCommand('copy'); done(); } catch(e) {}
+      document.body.removeChild(t);
+    }
+  });
+
+  document.getElementById('clear').addEventListener('click', function(){
+    store = {};
+    try { localStorage.removeItem(KEY); } catch(e) {}
+    document.querySelectorAll('.ask').forEach(function(a){
+      a.querySelector('textarea').value = '';
+      a.querySelectorAll('.opt').forEach(function(b){ b.classList.remove('on'); });
+      a.querySelector('.saved').textContent = '';
+      store[a.dataset.q] = { choice: '', note: '' };
+    });
+    count();
+  });
+
+  count();
+})();
+</script>
+</body>
+</html>
